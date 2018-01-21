@@ -22,11 +22,12 @@
                 this.bindings[event]=[func];
             return this.bindings[event]?event+":"+this.bindings[event].length-1:null;
         },
-        emit:function(event,args){
+        emit:function(event,payload){
             if(this.bindings[event]) {
-                forEach(this.bindings[event],function(key,func){
-                    func(args);
-                });
+                for (let i in this.bindings[event]) {
+                    let func = this.bindings[event][i];
+                    setTimeout(() => (func(payload)),0);
+                }
             }
         },
         unbind:function(id){
@@ -42,17 +43,20 @@
         init: function() {
             console.log("Setting up Shard...");
             console.log("Checking setup...");
-            let check_list = ['send-message'];
+            let check_list = ['send_message'];
             let flag = false;
-            for (let check in check_list)
-                if (!find(check)) flag=true;
+            for (let check in check_list) {
+                if (!this.find(check_list[check]))
+                    flag=true;
+            }
             if (flag)
                 console.log("Could not start Shard");
-            else
+            else {
                 console.log("Starting Shard...");
+                EVENTS.bind('on-message',this.parse.bind(this)); //Extra .bind to keep this bound to Shard
+            }
         },
         find: function(name) {
-            console.log(this);
             if (this[name]) {
                 console.log("Found "+name);
                 return this[name];
@@ -60,6 +64,9 @@
                 console.log("Could not find "+name);
                 return undefined;
             }
+        },
+        parse: function(payload) {
+            this.send_message(payload.text);
         }
     };
     window.EVENTS = EVENTS; //global
