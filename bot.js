@@ -66,8 +66,10 @@
             }
         },
         parse: function(payload) {
-            if (payload.text.startsWith('-echo'))
-                this.send_message(payload.text.substring(6));
+            let text_array = payload.text.split(' ');
+            let cmd = text_array.shift();
+            if (cmd == '-echo')
+                this.send_message(text_array.join(' '));
         }
     };
     window.EVENTS = EVENTS; //global
