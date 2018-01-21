@@ -66,7 +66,8 @@
             }
         },
         parse: function(payload) {
-            this.send_message(payload.text);
+            if (payload.text.startsWith('-echo'))
+                this.send_message(payload.text.substring(6));
         }
     };
     window.EVENTS = EVENTS; //global
