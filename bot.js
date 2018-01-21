@@ -2,6 +2,8 @@
 // @name         Shard
 // @namespace    http://tampermonkey.net/
 // @version      0.1
+// @updateUrl    https://raw.githubusercontent.com/Blackwerecat/Shard/master/bot.js
+// @downloadUrl  https://raw.githubusercontent.com/Blackwerecat/Shard/master/bot.js
 // @description  A client independent bot.
 // @author       You
 // @match        http://*/*
