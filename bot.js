@@ -4,7 +4,7 @@
 // @version      0.1
 // @updateUrl    https://raw.githubusercontent.com/Blackwerecat/Shard/master/bot.js
 // @downloadUrl  https://raw.githubusercontent.com/Blackwerecat/Shard/master/bot.js
-// @description  A client independent bot.
+// @description  Shard Bot
 // @author       You
 // @match        http://*/*
 // @grant        none
