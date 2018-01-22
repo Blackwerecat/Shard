@@ -55,15 +55,7 @@
                 console.log("Starting Shard...");
                 EVENTS.bind('on-message',this.parse.bind(this)); //Extra .bind to keep this bound to Shard
             }
-        },
-        commands: {'-echo':{auth:'user',run:function(payload) {
-            this.send_message({text:payload.args.join(' '),room:payload.origin.room});
-        }}},
-        ranks: {},
-        isAutherized: function(rank,auth) {
-            let hierarchy = ['user','admin'];
-            return hierarchy.indexOf(rank)>hierarchy.indexOf(auth);
-        },
+        }, //Initialization and debugging
         find: function(name) {
             if (this[name]) {
                 console.log("Found "+name);
@@ -73,6 +65,28 @@
                 return undefined;
             }
         },
+
+        commands: {
+            '-echo':{auth:'user',run:function(payload) {
+                this.send_message({text:payload.args.join(' '),room:payload.origin.room});
+            }},
+            '-setrank':{auth:'admin',run:function(payload) {
+                setRank(payload.args[0],payload.args[1]);
+            }}
+        },
+
+        ranks: {}, //Autherization
+        hierarchy: ['user','admin'],
+        setRank: function(name,rank) {if (this.hierarchy.contains(rank)) ranks[name]=rank;},
+        isAutherized: function(rank,auth) {
+            let rank_val = this.hierarchy.indexOf(rank);
+            let auth_val = this.hierarchy.indexOf(auth);
+            if (rank_val>-1 && auth_val>-1)
+                return rank_val>auth_val;
+            else
+                return undefined;
+        },
+
         parse: function(payload) {
             let text_array = payload.text.split(' ');
             let cmd = text_array.shift();
