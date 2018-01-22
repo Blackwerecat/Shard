@@ -56,6 +56,9 @@
                 EVENTS.bind('on-message',this.parse.bind(this)); //Extra .bind to keep this bound to Shard
             }
         },
+        commands: {'-echo':function(payload) {
+            this.send_message({text:payload.args.join(' '),room:payload.origin.room});
+        }},
         find: function(name) {
             if (this[name]) {
                 console.log("Found "+name);
@@ -68,8 +71,8 @@
         parse: function(payload) {
             let text_array = payload.text.split(' ');
             let cmd = text_array.shift();
-            if (cmd == '-echo')
-                this.send_message(text_array.join(' '));
+            if (this.commands[cmd])
+                this.commands[cmd].bind(this)({args:text_array,origin:payload});
         }
     };
     window.EVENTS = EVENTS; //global
