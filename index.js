@@ -1,15 +1,3 @@
-// ==UserScript==
-// @name         Shard
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @updateUrl    https://raw.githubusercontent.com/Blackwerecat/Shard/master/bot.js
-// @downloadUrl  https://raw.githubusercontent.com/Blackwerecat/Shard/master/bot.js
-// @description  Shard Bot
-// @author       You
-// @match        https://hack.chat/*
-// @grant        none
-// ==/UserScript==
-
 (function() {
     'use strict';
 
