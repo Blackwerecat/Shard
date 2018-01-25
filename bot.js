@@ -50,11 +50,15 @@
                 this.send_message({text:["Type one of the commands below to use Shard",
                                          "User Commands:",
                                          "-help                  : Shows the help page",
+                                         "-about                 : About Shard",
                                          "-echo <msg>            : Echos the message",
                                          "",
                                          "Admin Commands:",
                                          "-mute <time>           : Prevents user from using Shard for <time> seconds",
                                          "-setrank <nick> <rank> : Sets the rank of a nick"].join('\n'),room:payload.origin.room});
+            }},
+            '-about':{auth:'user',run:function(payload) {
+                this.send_message({text:"Shard is a general purpose chatroom bot. \nSoure code can be found here: https://github.com/Blackwerecat/Shard",room:payload.origin.room});
             }}
         },
 
