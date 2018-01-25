@@ -58,13 +58,13 @@
                                          "-setrank <nick> <rank> : Sets the rank of a nick"].join('\n'),room:payload.origin.room});
             }},
             '-about':{auth:'user',run:function(payload) {
-                this.send_message({text:"Shard is a general purpose chatroom bot. \nSoure code can be found here: https://github.com/Blackwerecat/Shard",room:payload.origin.room});
+                this.send_message({text:"Shard is a general purpose chatroom bot.\nFor commands, type -help\nSoure code can be found here: https://github.com/Blackwerecat/Shard",room:payload.origin.room});
             }}
         },
 
         muted: [],
         ranks: {}, //Autherization
-        hierarchy: ['user','admin'], //muted is below everything >:D
+        hierarchy: ['user','admin'], 
         setRank: function(name,rank) {
             if (this.hierarchy.includes(rank)){
                 this.ranks[name]=rank;
